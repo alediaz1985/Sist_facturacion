@@ -1,0 +1,132 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/venta.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header>
+        <h1>Nueva Venta</h1>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="fecha-venta">Fecha:</label>
+                <input type="date" id="fecha-venta" name="fecha-venta">
+            </div>
+            <div class="form-group">
+                <label for="tipo-factura">Tipo de Factura:</label>
+                <select id="tipo-factura">
+                    <option>Factura Electrónica C</option>
+                    <option>Factura X</option>
+                    <option>Nota Crédito Electr. C</option>
+                    <option>Nota de Crédito X</option>
+                    <option>Presupuesto</option>
+                    <option>Recibo</option>
+                    <option>Remito</option>
+                </select>
+            </div>
+        </div>        
+    </header>
+
+    <section class="cliente">
+        <label for="dni-cuit-input">DNI / CUIT:</label>
+        <input type="text" id="dni-cuit-input" placeholder="Ingrese DNI o CUIT">
+        <button id="buscar-cliente-btn">Buscar Cliente</button>
+        <label>Apellido y Nombre:</label>
+        <input type="text" id="nombre-cliente" readonly>
+        <label>Domicilio:</label>
+        <input type="text" id="direccion-cliente" readonly>
+        <label>Ciudad:</label>
+        <input type="text" id="ciudad-cliente" readonly>
+        <label>Teléfono:</label>
+        <input type="text" id="telefono-cliente" readonly>
+        <label>email:</label>
+        <input type="text" id="email-cliente" readonly>
+    </section>
+
+    <section class="ingreso-articulo">
+        <label for="busqueda-articulo">Buscar por:</label>
+        <select id="busqueda-articulo">
+            <option value="cod_barra">Cód. Barras</option>
+            <option value="nombre">Nombre</option>
+            <option value="cod_proveedor">Cód. Proveedor</option>
+            <option value="cod_interno">Cód. Interno</option>
+            <option value="codbar_nom">CódBar + Nom</option>
+        </select>
+        <input type="text" placeholder="Ingrese un artículo">
+        <input type="number" min="1" value="1">
+        <button>Agregar</button>
+    </section>
+
+    <section class="detalles-venta">
+        <table>
+            <thead>
+                <tr>
+                    <th>Detalle</th>
+                    <th>Cant.</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los artículos agregados aparecerán aquí -->
+            </tbody>
+        </table>
+    </section>
+
+    <section class="totales">
+        <div>
+            <label>Subtotal:</label>
+            <span>0.00</span>
+        </div>
+        <div>
+            <label>Descuento:</label>
+            <select>
+                <option>Sin Descuento</option>
+            </select>
+        </div>
+        <div>
+            <label>Total:</label>
+            <span>0.00</span>
+        </div>
+    </section>
+
+    <footer>
+        <button>Ingresar PAGO</button>
+        <button>PAGO EXACTO EFECTIVO</button>
+    </footer>
+</div>
+
+<script>
+    document.getElementById('buscar-cliente-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        const dniCuit = document.getElementById('dni-cuit-input').value;
+    
+        if (dniCuit) {
+            fetch(`/clientes/buscar/?dni_cuit=${dniCuit}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.getElementById('nombre-cliente').value = data.nombre;
+                        document.getElementById('direccion-cliente').value = data.direccion;
+                        document.getElementById('ciudad-cliente').value = data.ciudad;
+                        document.getElementById('telefono-cliente').value = data.telefono;
+                        document.getElementById('email-cliente').value = data.email;
+                    } else {
+                        alert(data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al procesar la solicitud.');
+                });
+        } else {
+            alert('Por favor, ingrese un DNI/CUIT válido.'); 
+        }
+    });
+</script>
+    
+
+{% endblock %}

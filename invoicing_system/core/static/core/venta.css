@@ -1,0 +1,129 @@
+/* Estilos generales del contenedor */
+.container {
+    width: 85%;
+    margin: 20px auto;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Estilos para los encabezados y secciones */
+header, section, footer {
+    margin-bottom: 20px;
+}
+
+header h1 {
+    color: #333;
+    font-size: 24px;
+}
+
+/* Estilos de formulario para la búsqueda y entrada de datos */
+.form-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Botones generales */
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos específicos para los botones dentro de las secciones */
+.ingreso-articulo button, .cliente button, footer button {
+    display: inline-block; /* Asegura que los botones no ocupen todo el ancho */
+}
+
+/* Estilos para la tabla de detalles de venta */
+table {
+    width: 100%;
+    margin-top: 10px;
+    border-collapse: collapse;
+    border: 1px solid #ddd;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f8f8f8;
+}
+
+/* Estilos para el área de totales */
+.totales div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.totales label {
+    margin-right: 10px;
+}
+
+/* Estilos para el pie de página con los botones */
+footer {
+    text-align: right;
+}
+
+input[type="date"] {
+    width: 200px;  /* Ajusta según tus necesidades */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Campo para fecha y tipo de factura*/
+.form-row {
+    display: flex;
+    align-items: center;  /* Asegura la alineación vertical */
+    justify-content: start;  /* Alineación horizontal al inicio */
+}
+
+.form-group {
+    margin-right: 20px;  /* Espacio entre los campos */
+    flex-grow: 1;  /* Permite que los elementos ocupen el espacio disponible */
+}
+
+.form-group:last-child {
+    margin-right: 0;  /* No margen derecho para el último elemento */
+}
+
+input[type="date"], select {
+    width: 100%;  /* Utiliza todo el ancho del .form-group */
+    padding: 6px 12px;
+    box-sizing: border-box;  /* Incluye el padding y border en el cálculo de ancho */
+    height: 38px;  /* Altura explícita para asegurar la uniformidad */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}

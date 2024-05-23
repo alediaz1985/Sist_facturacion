@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Facturación</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/styles.css' %}">
+    {% block extra_css %}{% endblock %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <nav id="primary-menu">
+        <ul>
+            <li><a href="#">Venta</a>
+                <ul>
+                    <li><a href="/venta/nueva/">Nueva Venta</a></li>
+                    <li><a href="/venta/guardar/">Guardar Comprobante</a></li>
+                    <li><a href="/venta/buscar/">Buscar Comprobante</a></li>
+                    <li><a href="/venta/anular/">Anular Comprobante</a></li>
+                    <li><a href="/venta/reimprimir/">Reimprimir Comprobante</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Caja</a>
+                <ul>
+                    <li><a href="/caja/extraccion/">Extracción e Ingreso de Caja</a></li>
+                    <li><a href="/caja/apertura/">Apertura de Caja</a></li>
+                    <li><a href="/caja/cierre/">Cierre de Caja</a></li>
+                    <li><a href="/caja/ver-cerradas/">Ver Cajas Cerradas</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Clientes</a>
+                <ul>
+                    <li><a href="/clientes/alta/">Alta Cliente</a></li>
+                    <li><a href="/clientes/buscar/">Buscar Clientes</a></li>
+                    <li><a href="/clientes/cuenta-corriente/">Buscar Clientes de Cuenta Corriente</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Proveedores</a>
+                <ul>
+                    <li><a href="/proveedores/alta/">Alta Proveedores</a></li>
+                    <li><a href="/proveedores/entrada/">Entrada de Mercadería</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Estadísticas</a>
+                <ul>
+                    <li><a href="/estadisticas/ventas-usuarios/">Ventas por Usuarios</a></li>
+                    <li><a href="/estadisticas/articulos-vendidos/">Artículos Vendidos</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Informes</a>
+                <ul>
+                    <li><a href="/informes/precios/">Precios</a></li>
+                    <li><a href="/informes/ventas/">Ventas</a></li>
+                    <li><a href="/informes/compras/">Compras</a></li>
+                    <li><a href="/informes/fiscales/">Fiscales</a></li>
+                    <li><a href="/informes/reponer-stock/">Artículos a Reponer Stock</a></li>
+                    <li><a href="/informes/articulos/">Artículos</a></li>
+                    <li><a href="/informes/clientes/">Clientes</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Artículos</a>
+                <ul>
+                    <li><a href="/articulos/consulta-precios/">Consulta de Precios</a></li>
+                    <li><a href="/articulos/buscar/">Buscar Artículo</a></li>
+                    <li><a href="/articulos/alta/">Alta de Artículos</a></li>
+                    <li><a href="/articulos/promociones/">Promociones por Cantidad</a></li>
+                    <li><a href="/articulos/aumento-precios/">Aumento Masivo de Precios</a></li>
+                    <li><a href="/articulos/actualizacion-datos/">Actualización Masiva de Datos</a></li>
+                    <li><a href="/articulos/impresion-codigos/">Impresión de Código de Barras</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Operaciones</a>
+                <ul>
+                    <li><a href="/operaciones/factura-electronica/">Factura Electrónica</a></li>
+                    <li><a href="/operaciones/rg3685/">Régimen de Información de Ventas RG3685</a></li>
+                    <li><a href="/operaciones/cotizacion-dolar/">Actualizar Cotización de Dólar</a></li>
+                    <li><a href="/operaciones/mercado-libre/">Mercado Libre</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Administración</a>
+                <ul>
+                    <li><a href="/administracion/categorias/">Categorías</a></li>
+                    <li><a href="/administracion/proveedores/">Proveedores Fabricantes</a></li>
+                    <li><a href="/administracion/usuarios/">Usuarios</a></li>
+                    <li><a href="/administracion/tarjetas/">Tarjetas</a></li>
+                    <li><a href="/administracion/descuentos/">Descuentos</a></li>
+                    <li><a href="/administracion/tipos-movimientos/">Tipos de Mov. de Caja</a></li>
+                    <li><a href="/administracion/backup/">Copia de Seguridad y Backup</a></li>
+                    <li><a href="/administracion/importacion-excel/">Importación de Datos de Excel</a></li>
+                    <li><a href="/administracion/exportacion-excel/">Exportación de Datos a Excel</a></li>
+                    <li><a href="/administracion/configuracion/">Configuración del Sistema</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Versión</a>
+                <ul>
+                    <li><a href="/version/software/">Versión del Software</a></li>
+                    <li><a href="/version/registro/">Registro</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <main>
+        {% block content %}
+        <!-- El contenido específico de cada página se inyectará aquí -->
+        {% endblock %}
+    </main>
+    <script>
+        $(document).ready(function() {
+            $('#primary-menu > ul > li > a').click(function(e) {
+                e.preventDefault();  // Prevenir la navegación predeterminada
+                $(this).parent().siblings().find('ul').slideUp(); // Cerrar otros submenús abiertos
+                $(this).next('ul').slideToggle(); // Abrir o cerrar el submenú del elemento clickeado
+            });
+        });
+    </script>
+</body>
+</html>

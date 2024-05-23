@@ -1,0 +1,63 @@
+{% extends 'core/base.html' %}
+
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/venta.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header>
+        <h1>Detalles del Cliente</h1>
+    </header>
+
+    <form id="cliente-form">
+        <div class="form-group">
+            <label for="dni-cuit-input">DNI / CUIT:</label>
+            <input type="text" id="dni-cuit-input" name="dni-cuit" placeholder="Ingrese DNI o CUIT">
+        </div>
+        <div class="form-group">
+            <label>Apellido y Nombre:</label>
+            <input type="text" id="nombre-cliente" name="nombre-cliente">
+        </div>
+        <div class="form-group">
+            <label>Domicilio:</label>
+            <input type="text" id="domicilio-cliente" name="domicilio-cliente">
+        </div>
+        <div class="form-group">
+            <label>Ciudad:</label>
+            <input type="text" id="ciudad-cliente" name="ciudad-cliente">
+        </div>
+        <div class="form-group">
+            <label>Teléfono:</label>
+            <input type="text" id="telefono-cliente" name="telefono-cliente">
+        </div>
+
+        <button type="button" id="editar-btn">Editar</button>
+        <button type="submit" id="guardar-btn">Guardar</button>
+    </form>
+</div>
+
+<script>
+document.getElementById('editar-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    // Habilita todos los campos para edición
+    var formElements = document.getElementById('cliente-form').elements;
+    for (var i = 0; i < formElements.length; i++) {
+        if (formElements[i].type !== 'submit') {
+            formElements[i].readOnly = false;  // Hacer los campos editables
+        }
+    }
+});
+
+document.getElementById('cliente-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    // Aquí agregarías la lógica para enviar los datos modificados al servidor
+    console.log('Datos para guardar:', Object.fromEntries(formData.entries()));
+    // fetch(...) para enviar los datos al servidor
+});
+</script>
+
+{% endblock %}

@@ -1,0 +1,108 @@
+{% extends 'core/base.html' %}
+
+{% load static %}  <!-- Cargar los tags estáticos al principio del archivo -->
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'core/venta.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header>
+        <h1>Nueva Venta</h1>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fecha-venta">Fecha:</label>
+                    <input type="date" id="fecha-venta" name="fecha-venta">
+                </div>
+                <div class="form-group">
+                    <label for="tipo-factura">Tipo de Factura:</label>
+                    <select id="tipo-factura">
+                        <option>Factura Electrónica C</option>
+                        <option>Factura X</option>
+                        <option>Nota Crédito Electr. C</option>
+                        <option>Nota de Crédito X</option>
+                        <option>Presupuesto</option>
+                        <option>Recibo</option>
+                        <option>Remito</option>
+                    </select>
+                </div>
+            </div>        
+    </header>
+
+    
+    <section class="cliente">
+        <input type="text" placeholder="DNI / CUIT">
+        <button>Buscar Cliente</button>
+        <button>Quitar Cliente</button>
+        <input type="text" placeholder="Nombre del cliente">
+        <button>Ver Ficha Cliente</button>
+    </section>
+    <section class="detalles-venta">
+        
+    <section class="ingreso-articulo">
+    <div class="form-row">
+        <div class="form-group">
+            <label for="busqueda-articulo">Buscar por:</label>
+            <select id="busqueda-articulo">
+                <option value="cod_barra">Cód. Barras</option>
+                <option value="nombre">Nombre</option>
+                <option value="cod_proveedor">Cód. Proveedor</option>
+                <option value="cod_interno">Cód. Interno</option>
+                <option value="codbar_nom">CódBar + Nom</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="text" placeholder="Ingrese un artículo" style="flex-grow: 2;">
+        </div>
+        <div class="form-group">
+            <input type="number" min="1" value="1">
+        </div>
+        <button>Agregar</button>
+    </div>
+    <section class="detalles-venta">
+        <table>
+            <thead>
+                <tr>
+                    <th>Detalle</th>
+                    <th>Cant.</th>
+                    <th>Precio</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los artículos agregados aparecerán aquí -->
+            </tbody>
+        </table>
+    </section>
+    <section class="totales">
+        <div>
+            <label>Subtotal:</label>
+            <span>0.00</span>
+        </div>
+        <div>
+            <label>Descuento:</label>
+            <select>
+                <option>Sin Descuento</option>
+            </select>
+        </div>
+        <div>
+            <label>Total:</label>
+            <span>0.00</span>
+        </div>
+    </section>
+    <footer>
+        <button>Ingresar PAGO</button>
+        <button>PAGO EXACTO EFECTIVO</button>
+    </footer>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var today = new Date().toISOString().substr(0, 10);
+        document.getElementById('fecha-venta').value = today;
+    });
+</script>
+
+{% endblock %}
+
